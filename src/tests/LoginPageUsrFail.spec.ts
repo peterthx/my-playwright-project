@@ -4,7 +4,8 @@ import { LoginPage } from "../Pages/LoginPage";
 test.describe("Login page demo", () => {
   let loginPage: LoginPage;
   test.beforeEach(async ({ page }) => {
-    await page.goto("http://the-internet.herokuapp.com/login");
+    loginPage = new LoginPage(page);
+    await loginPage.navigate();
     await expect(page).toHaveTitle(/The Internet/);
   });
 
