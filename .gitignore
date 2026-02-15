@@ -4,8 +4,13 @@ node_modules/
 # Test Results & Reports
 test-results/
 playwright-report/
-blob-report/
-.playwright/
+videos/
+traces/
+screenshots/
+
+# Package Manager
+pnpm-store/
+.pnpm-debug.log
 
 # Environment Variables
 .env
@@ -44,9 +49,6 @@ tmp/
 temp/
 *.tmp
 
-# Playwright
-.auth/
-test-results/
 downloads/
 
 browsers.json
