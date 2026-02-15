@@ -12,13 +12,9 @@ This project demonstrates E2E testing best practices with Playwright, including:
 
 ### Test Coverage
 
-| Test File | Scenario | Status |
-|-----------|----------|--------|
-| `example.spec.ts` | Valid login + secure area verification | ✅ Passing |
-| `LoginPageSuccess.spec.ts` | Valid credentials login | ✅ Passing |
-| `LoginPageUsrFail.spec.ts` | Invalid username error | 🔧 Configured |
-| `LoginPagePswdFail.spec.ts` | Invalid password error | 🔧 Configured |
-| `LoginPageBothFail.spec.ts` | Invalid username & password error | ✅ Passing |
+| Test File | Scenarios | Status |
+|-----------|-----------|--------|
+| `LoginPageUsecase.spec.ts` | Valid login, invalid username, invalid password, invalid credentials | ✅ Passing |
 
 ---
 
@@ -88,17 +84,16 @@ pnpm exec playwright show-report
 ```
 my-playwright-project/
 ├── src/
-│   ├── Pages/
-│   │   └── LoginPage.ts          # Page Object Model
+│   ├── pages/
+│   │   └── LoginPage.ts              # Page Object Model
+│   ├── screenshots/                  # Test screenshots
 │   └── tests/
-│       ├── example.spec.ts       # Basic login test
-│       ├── LoginPageSuccess.spec.ts
-│       ├── LoginPageUsrFail.spec.ts
-│       ├── LoginPagePswdFail.spec.ts
-│       └── LoginPageBothFail.spec.ts
-├── test-results/                 # Test execution reports
+│       └── LoginPageUsecase.spec.ts  # Login test scenarios
+├── playwright-report/                # Test report
+├── test-results/                     # Test execution details
 ├── package.json
 ├── pnpm-lock.yaml
+├── playwright.config.ts
 └── README.md
 ```
 
@@ -198,7 +193,97 @@ pnpm exec playwright install
 
 ---
 
-## 📚 Resources
+## � Git Commit Guidelines
+
+### Commit Message Format
+
+Follow the **Conventional Commits** specification for clear, semantic commit messages:
+
+```
+<type>(<scope>): <subject>
+
+<body>
+
+<footer>
+```
+
+### Types
+
+- **feat**: New feature or test scenario
+- **fix**: Bug fix or test correction
+- **refactor**: Code refactoring without feature changes
+- **test**: Adding or updating tests
+- **docs**: Documentation updates (README, comments)
+- **chore**: Build, dependencies, configuration changes
+- **perf**: Performance improvements
+
+### Scope
+
+Optional scope indicating which part of the project:
+- `login-tests` - Login test scenarios
+- `page-object` - LoginPage class updates
+- `config` - Configuration files
+- `deps` - Dependencies
+
+### Subject
+
+- Use imperative mood ("add" not "added")
+- Don't capitalize first letter
+- No period (.) at the end
+- Limit to 50 characters
+
+### Examples
+
+**Good commits:**
+```bash
+git commit -m "test(login-tests): add invalid password error scenario"
+git commit -m "feat(page-object): add new helper method for form validation"
+git commit -m "docs: update README with setup instructions"
+git commit -m "fix(login-tests): handle navigation timeout in beforeEach"
+git commit -m "chore(deps): update playwright to v1.40.0"
+```
+
+**With body (for complex changes):**
+```bash
+git commit -m "refactor(page-object): reorganize locators by element type
+
+- Group input locators together
+- Group button locators together
+- Improve readability and maintainability
+
+This makes the LoginPage class easier to navigate and update."
+```
+
+### Best Practices
+
+1. **Commit Often** - Make small, focused commits
+2. **One Concern Per Commit** - Don't mix multiple features/fixes
+3. **Descriptive Messages** - Future you will appreciate clarity
+4. **Reference Issues** - Use `Fixes #123` in footer for issue tracking
+5. **Review Before Committing** - Use `git diff` to review changes
+
+### Useful Commands
+
+```bash
+# View staged changes
+git diff --staged
+
+# View unstaged changes
+git diff
+
+# Amend last commit
+git commit --amend
+
+# Interactive rebase (clean up commits)
+git rebase -i HEAD~3
+
+# View commit history
+git log --oneline
+```
+
+---
+
+## �📚 Resources
 
 - [Playwright Documentation](https://playwright.dev)
 - [Playwright Testing Guide](https://playwright.dev/docs/intro)
@@ -219,4 +304,4 @@ Created as a Playwright testing demonstration project.
 
 ---
 
-**Last Updated**: February 14, 2026
+**Last Updated**: February 15, 2026
