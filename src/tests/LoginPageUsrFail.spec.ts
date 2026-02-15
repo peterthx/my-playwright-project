@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { LoginPage } from "../Pages/LoginPage";
+import { LoginPage } from "../pages/LoginPage";
 
 test.describe("Login page demo", () => {
   let loginPage: LoginPage;
@@ -14,6 +14,7 @@ test.describe("Login page demo", () => {
   }) => {
     loginPage = new LoginPage(page);
     await Promise.all([loginPage.login("tomholland", "SuperSecretPassword!")]);
+    await page.screenshot({ path: "src/screenshots/login-fail-user.png", fullPage: true });
     await expect(page.locator("h2")).toHaveText("Login Page");
     await expect(page.locator("#flash-messages")).toContainText(
       "Your username is invalid!",

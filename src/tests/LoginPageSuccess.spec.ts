@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { LoginPage } from "../Pages/LoginPage";
+import { LoginPage } from "../pages/LoginPage";
 
 test.describe("Login page demo", () => {
   let loginPage: LoginPage;
@@ -13,6 +13,10 @@ test.describe("Login page demo", () => {
     page,
   }) => {
     await loginPage.login("tomsmith", "SuperSecretPassword!");
+    await page.screenshot({
+      path: "src/screenshots/login-success.png",
+      fullPage: true,
+    });
 
     // Assertions
     await expect(page).toHaveURL(/\/secure/);
@@ -20,7 +24,6 @@ test.describe("Login page demo", () => {
     await expect(loginPage.content).toContainText("Welcome to the Secure Area");
   });
 
-  // Reuse the logic already defined in your Page Object
   test.afterEach(async () => {
     await loginPage.logout();
   });

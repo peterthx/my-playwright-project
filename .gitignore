@@ -1,13 +1,11 @@
 # Dependencies
 node_modules/
-pnpm-lock.yaml
 
 # Test Results & Reports
 test-results/
-tests/__pycache__/
 playwright-report/
 blob-report/
-playwright/.cache/
+.playwright/
 
 # Environment Variables
 .env
@@ -20,15 +18,14 @@ playwright/.cache/
 *.swp
 *.swo
 *~
-.DS_Store
 *.sublime-project
 *.sublime-workspace
 
 # OS Files
-.DS_Store
 Thumbs.db
 .Spotlight-V100
 .Trashes
+.DS_Store
 
 # Build Artifacts
 dist/
@@ -48,4 +45,8 @@ temp/
 *.tmp
 
 # Playwright
+.auth/
+test-results/
+downloads/
+
 browsers.json
