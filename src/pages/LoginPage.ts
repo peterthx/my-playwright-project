@@ -14,7 +14,7 @@ export class LoginPage {
     this.usernameInput = page.locator("#username");
     this.passwordInput = page.locator("#password");
     this.submitButton = page.locator('button[type="submit"]'); 
-    this.flashMessages = page.locator("#flash"); 
+    this.flashMessages = page.locator("#flash-messages"); 
     this.content = page.locator("#content");
     this.logoutButton = page.locator('a[href="/logout"]');
   }

@@ -38,7 +38,7 @@ test.describe("Login page demo", () => {
       fullPage: true,
     });
     await expect(page.locator("h2")).toHaveText("Login Page");
-    await expect(page.locator("#flash-messages")).toContainText(
+    await expect(loginPage.flashMessages).toContainText(
       "Your username is invalid!",
     );
     await expect(page.locator("#content")).toContainText(
@@ -56,7 +56,7 @@ test.describe("Login page demo", () => {
       fullPage: true,
     });
     await expect(page.locator("h2")).toHaveText("Login Page");
-    await expect(page.locator("#flash-messages")).toContainText(
+    await expect(loginPage.flashMessages).toContainText(
       "Your password is invalid!",
     );
     await expect(page.locator("#content")).toContainText(
@@ -75,7 +75,7 @@ test.describe("Login page demo", () => {
     });
 
     await expect(page.locator("h2")).toHaveText("Login Page");
-    await expect(page.locator("#flash-messages")).toContainText(
+    await expect(loginPage.flashMessages).toContainText(
       "Your username is invalid!",
     );
     await expect(page.locator("#content")).toContainText(
