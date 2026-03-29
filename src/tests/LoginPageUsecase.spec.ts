@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { LoginPage } from "../pages/LoginPage";
-import { validUser, invalidUser, invalidPassword } from "../data/Users";
+import { validUser, invalidUser, invalidPassword, invalidUserPasswordBoth } from "../data/Users";
 
 test.describe("Login page demo", () => {
   let loginPage: LoginPage;
@@ -40,7 +40,7 @@ test.describe("Login page demo", () => {
   });
 
   test("logs in with both invalid credentials and shows error message", async ({ page }) => {
-    await loginPage.login("tomholland", "Password!");
+    await loginPage.login(invalidUserPasswordBoth.username, invalidUserPasswordBoth.password);
 
     await expect(page.locator("h2")).toHaveText("Login Page");
     await expect(loginPage.flashMessages).toContainText("Your username is invalid!");

@@ -17,3 +17,9 @@ export const invalidPassword: User = {
   username: "tomsmith",
   password: "Password!",
 };
+
+
+export const invalidUserPasswordBoth: User = {
+  username: "tomholland",
+  password: "Password!",
+};
