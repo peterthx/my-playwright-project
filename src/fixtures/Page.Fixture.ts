@@ -3,13 +3,13 @@ import { PageBase } from "../pages/PageBase";
 import { LoginPage } from "../pages/LoginPage";
 import { SecurePage } from "../pages/SecurePage";
 
-type CommFixtures = {
+type CommonFixtures = {
   pageBase: PageBase;
   loginPage: LoginPage;
   securePage: SecurePage;
 };
 
-export const test = base.extend<CommFixtures>({
+export const test = base.extend<CommonFixtures>({
   pageBase: async ({ page }, use) => {
     const pageBase = new PageBase(page);
     await use(pageBase);
