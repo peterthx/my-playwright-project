@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
-import { LoginPage } from "../Pages/LoginPage";
+import { LoginPage } from "../pages/LoginPage";
+import { validUser, invalidUser, invalidPassword } from "../data/Users";
 
 test.describe("Login page demo", () => {
   let loginPage: LoginPage;
@@ -9,14 +10,8 @@ test.describe("Login page demo", () => {
     await loginPage.navigate();
   });
 
-  test("logs in with valid credentials and shows secure area", async ({
-    page,
-  }) => {
-    await loginPage.login("tomsmith", "SuperSecretPassword!");
-    await page.screenshot({
-      path: "src/screenshots/login-success.png",
-      fullPage: true,
-    });
+  test("logs in with valid credentials and shows secure area", async ({ page }) => {
+    await loginPage.login(validUser.username, validUser.password);
 
     // Assertions
     await expect(page).toHaveURL(/\/secure/);
@@ -28,58 +23,27 @@ test.describe("Login page demo", () => {
     await loginPage.logout();
   });
 
-  test("logs in with valid credentials and shows Your username is invalid!", async ({
-    page,
-  }) => {
-    loginPage = new LoginPage(page);
-    await Promise.all([loginPage.login("tomholland", "SuperSecretPassword!")]);
-    await page.screenshot({
-      path: "src/screenshots/login-fail-user.png",
-      fullPage: true,
-    });
+  test("logs in with invalid username and shows error message", async ({ page }) => {
+    await loginPage.login(invalidUser.username, invalidUser.password);
+
     await expect(page.locator("h2")).toHaveText("Login Page");
-    await expect(loginPage.flashMessages).toContainText(
-      "Your username is invalid!",
-    );
-    await expect(page.locator("#content")).toContainText(
-      "This is where you can log into the secure area. Enter tomsmith for the username and SuperSecretPassword! for the password. If the information is wrong you should see error messages.",
-    );
+    await expect(loginPage.flashMessages).toContainText("Your username is invalid!");
+    await expect(page.locator("#content")).toContainText("This is where you can log into the secure area.");
   });
 
-  test("logs in with valid credentials and shows Your password is invalid!", async ({
-    page,
-  }) => {
-    loginPage = new LoginPage(page);
-    await Promise.all([loginPage.login("tomsmith", "Password!")]);
-    await page.screenshot({
-      path: "src/screenshots/login-fail-password.png",
-      fullPage: true,
-    });
+  test("logs in with invalid password and shows error message", async ({ page }) => {
+    await loginPage.login(invalidPassword.username, invalidPassword.password);
+
     await expect(page.locator("h2")).toHaveText("Login Page");
-    await expect(loginPage.flashMessages).toContainText(
-      "Your password is invalid!",
-    );
-    await expect(page.locator("#content")).toContainText(
-      "This is where you can log into the secure area. Enter tomsmith for the username and SuperSecretPassword! for the password. If the information is wrong you should see error messages.",
-    );
+    await expect(loginPage.flashMessages).toContainText("Your password is invalid!");
+    await expect(page.locator("#content")).toContainText("This is where you can log into the secure area.");
   });
 
-  test("logs in with valid credentials and shows Your username and password are invalid!", async ({
-    page,
-  }) => {
-    loginPage = new LoginPage(page);
-    await Promise.all([loginPage.login("tomholland", "Password!")]);
-    await page.screenshot({
-      path: "src/screenshots/login-fail-both.png",
-      fullPage: true,
-    });
+  test("logs in with both invalid credentials and shows error message", async ({ page }) => {
+    await loginPage.login("tomholland", "Password!");
 
     await expect(page.locator("h2")).toHaveText("Login Page");
-    await expect(loginPage.flashMessages).toContainText(
-      "Your username is invalid!",
-    );
-    await expect(page.locator("#content")).toContainText(
-      "This is where you can log into the secure area. Enter tomsmith for the username and SuperSecretPassword! for the password. If the information is wrong you should see error messages.",
-    );
+    await expect(loginPage.flashMessages).toContainText("Your username is invalid!");
+    await expect(page.locator("#content")).toContainText("This is where you can log into the secure area.");
   });
 });

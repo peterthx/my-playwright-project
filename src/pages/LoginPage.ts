@@ -1,26 +1,26 @@
-import { type Locator, type Page } from "@playwright/test";
+import { Locator, Page } from "@playwright/test";
+import { BasePage } from "./BasePage";
 
-export class LoginPage {
-  readonly page: Page;
-  readonly usernameInput: Locator;
-  readonly passwordInput: Locator;
-  readonly submitButton: Locator;
-  readonly flashMessages: Locator;
-  readonly content: Locator;
-  readonly logoutButton: Locator;
+export class LoginPage extends BasePage {
+  public readonly usernameInput: Locator;
+  public readonly passwordInput: Locator;
+  public readonly submitButton: Locator;
+  public readonly flashMessages: Locator;
+  public readonly content: Locator;
+  public readonly logoutButton: Locator;
 
   constructor(page: Page) {
-    this.page = page;
-    this.usernameInput = page.locator("#username");
-    this.passwordInput = page.locator("#password");
-    this.submitButton = page.locator('button[type="submit"]'); 
-    this.flashMessages = page.locator("#flash-messages"); 
+    super(page);
+    this.usernameInput = page.locator('#username');
+    this.passwordInput = page.locator('#password');
+    this.submitButton = page.locator('button[type="submit"]');
+    this.flashMessages = page.locator("#flash-messages");
     this.content = page.locator("#content");
     this.logoutButton = page.locator('a[href="/logout"]');
   }
 
   async navigate() {
-    await this.page.goto("/login"); 
+    await super.navigate("/login");
   }
 
   async login(username: string, password: string) {
