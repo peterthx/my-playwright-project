@@ -18,7 +18,6 @@ export const invalidPassword: User = {
   password: "Password!",
 };
 
-
 export const invalidUserPasswordBoth: User = {
   username: "tomholland",
   password: "Password!",

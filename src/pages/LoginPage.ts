@@ -1,37 +1,31 @@
-import { Locator, Page } from "@playwright/test";
-import { BasePage } from "./BasePage";
+import { type Locator, type Page } from "@playwright/test";
+import { PageBase } from "./PageBase";
 
-export class LoginPage extends BasePage {
-  public readonly usernameInput: Locator;
-  public readonly passwordInput: Locator;
-  public readonly submitButton: Locator;
-  public readonly flashMessages: Locator;
+export class LoginPage extends PageBase {
+  private readonly txtUsername: Locator;
+  private readonly txtPassword: Locator;
+  private readonly submitButton: Locator;
+  public readonly msgFlash: Locator;
   public readonly content: Locator;
-  public readonly logoutButton: Locator;
+  public readonly hdrLogin: Locator;
 
   constructor(page: Page) {
     super(page);
-    this.usernameInput = page.locator('#username');
-    this.passwordInput = page.locator('#password');
+    this.txtUsername = page.locator("#username");
+    this.txtPassword = page.locator("#password");
     this.submitButton = page.locator('button[type="submit"]');
-    this.flashMessages = page.locator("#flash-messages");
+    this.msgFlash = page.locator("#flash-messages");
     this.content = page.locator("#content");
-    this.logoutButton = page.locator('a[href="/logout"]');
+    this.hdrLogin = page.locator("h2");
   }
 
-  async navigate() {
+  public async navigate(): Promise<void> {
     await super.navigate("/login");
   }
 
-  async login(username: string, password: string) {
-    await this.usernameInput.fill(username);
-    await this.passwordInput.fill(password);
+  public async login(username: string, password: string): Promise<void> {
+    await this.txtUsername.fill(username);
+    await this.txtPassword.fill(password);
     await this.submitButton.click();
-  }
-
-  async logout() {
-    if (await this.logoutButton.isVisible()) {
-      await this.logoutButton.click();
-    }
   }
 }
