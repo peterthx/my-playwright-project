@@ -1,9 +1,7 @@
 import { type Locator, type Page } from "@playwright/test";
 
 export class PageBase {
-  protected readonly page: Page;
-
-  constructor(page: Page) {
+  constructor(protected page: Page) {
     this.page = page;
   }
 

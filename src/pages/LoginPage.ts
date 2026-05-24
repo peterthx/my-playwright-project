@@ -2,21 +2,32 @@ import { type Locator, type Page } from "@playwright/test";
 import { PageBase } from "./PageBase";
 
 export class LoginPage extends PageBase {
-  private readonly txtUsername: Locator;
-  private readonly txtPassword: Locator;
-  private readonly submitButton: Locator;
-  public readonly msgFlash: Locator;
-  public readonly content: Locator;
-  public readonly hdrLogin: Locator;
-
+  
   constructor(page: Page) {
     super(page);
-    this.txtUsername = page.locator("#username");
-    this.txtPassword = page.locator("#password");
-    this.submitButton = page.locator('button[type="submit"]');
-    this.msgFlash = page.locator("#flash-messages");
-    this.content = page.locator("#content");
-    this.hdrLogin = page.locator("h2");
+  }
+
+  private get txtUsername(): Locator {
+    return this.page.locator("#username")
+  }
+
+  private get txtPassword(): Locator {
+    return this.page.locator("#password")
+  }
+  private get submitButton(): Locator {
+    return this.page.locator('button[type="submit"]');
+  }
+
+  get msgFlash(): Locator {
+    return this.page.locator("#flash-messages")
+  }
+
+  get content(): Locator {
+    return this.page.locator("#content")
+  }
+
+  get hdrLogin(): Locator {
+    return this.page.locator("h2")
   }
 
   public async navigate(): Promise<void> {

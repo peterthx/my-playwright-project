@@ -14,14 +14,17 @@ export const test = base.extend<CommonFixtures>({
     const pageBase = new PageBase(page);
     await use(pageBase);
   },
+
   loginPage: async ({ page }, use) => {
     const loginPage = new LoginPage(page);
     await use(loginPage);
   },
+
   securePage: async ({ page }, use) => {
     const securePage = new SecurePage(page);
     await use(securePage);
   },
+  
 });
 
 export { expect } from "@playwright/test";
